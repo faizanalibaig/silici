@@ -2,10 +2,13 @@ import { NextFunction, Request, Response } from "express";
 const { Router } = require("express");
 
 const AIRoutes = require("./modules/ai/ai.route");
+const AuthRoutes = require("./modules/auth0/auth0.route");
 
 const router = Router();
 
 router.use("/v0", AIRoutes);
+router.use("/v0", AuthRoutes);
+
 router.route("/v0").get((req: Request, res: Response) => {
   res.send("Hello World!");
 });

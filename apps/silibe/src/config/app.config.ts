@@ -8,6 +8,12 @@ interface IConfig {
   gemini: {
     key: string;
   };
+  auth0: {
+    secret: string;
+    baseURL: string;
+    clientID: string;
+    issuerBaseURL: string;
+  };
 }
 
 export const config: IConfig = {
@@ -17,5 +23,11 @@ export const config: IConfig = {
   },
   gemini: {
     key: process.env.GEMINI_API_KEY || "",
+  },
+  auth0: {
+    secret: process.env.AUTH0_SECRET || "",
+    baseURL: process.env.AUTH0_BASE_URL || "",
+    clientID: process.env.AUTH0_CLIENT_ID || "",
+    issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL || "",
   },
 };
