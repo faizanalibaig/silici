@@ -2,6 +2,7 @@ const http = require("http");
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
+const { auth } = require("express-openid-connect");
 
 const { config, databaseConfig } = require("./config");
 const { AppRouter } = require("./app.route");
@@ -12,8 +13,24 @@ databaseConfig();
 
 app.use(express.json());
 app.use(express.static("public"));
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  }),
+);
 app.use(morgan("dev"));
+
+app.use(
+  auth({
+    authRequired: false,
+    auth0Logout: true,
+    secret: config.auth0.secret,
+    baseURL: config.auth0.baseURL,
+    clientID: config.auth0.clientID,
+    issuerBaseURL: config.auth0.issuerBaseURL,
+  }),
+);
 
 app.use(AppRouter);
 

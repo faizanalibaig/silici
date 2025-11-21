@@ -1,7 +1,7 @@
 "use client";
 
 import Error from "next/error";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { FaArrowUp } from "react-icons/fa";
 import { FaCopy } from "react-icons/fa";
@@ -11,6 +11,19 @@ const BaseUrl = process.env.BaseUrl || "http://localhost:8080";
 export default function Page() {
   const [input, setInput] = useState("");
   const [response, setResponse] = useState("");
+
+  useEffect(() => {
+    (async () => {
+      const result = await fetch("http://localhost:8080/v0/profile", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+      console.log(result);
+    })();
+  }, []);
 
   const SubmitChat = (e: React.FormEvent) => {
     e.preventDefault();
