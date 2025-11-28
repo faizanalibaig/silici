@@ -7,9 +7,9 @@ const XRoutes = require("./modules/x-authorize/x.route");
 
 const router = Router();
 
-router.use("/v0", AIRoutes);
-router.use("/v0", AuthRoutes);
-router.use("/v0", XRoutes);
+router.use("/api/v0", AIRoutes);
+router.use("/api/v0", AuthRoutes);
+router.use("/api/v0", XRoutes);
 
 router.route("/v0").get((req: Request, res: Response) => {
   res.send("Hello World!");

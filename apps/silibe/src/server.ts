@@ -1,4 +1,5 @@
 const http = require("http");
+import { Request, Response } from "express";
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
@@ -31,6 +32,10 @@ app.use(
     issuerBaseURL: config.auth0.issuerBaseURL,
   }),
 );
+
+app.get("/", (req: Request, res: Response) => {
+  res.json("Hello World!");
+});
 
 app.use(AppRouter);
 
